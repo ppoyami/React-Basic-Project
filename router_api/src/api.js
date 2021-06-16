@@ -4,7 +4,7 @@ import axios from 'axios';
 // base url: https://sandbox.iexapis.com
 
 // my sandbox token: Tpk_47085b147c3547b28dd93fccdb291554
-
+// MEMO: api.js 파일 구성하기
 const api = axios.create({
   baseURL: 'https://sandbox.iexapis.com/stable',
   params: {

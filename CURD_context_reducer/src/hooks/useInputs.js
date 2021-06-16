@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const useInputs = (initialState) => {
+// MEMO: 다중 input 상태관리 커스텀 훅
+const useInputs = initialState => {
   const [state, setState] = useState(initialState);
 
-  const onChange = (e) => {
+  const onChange = e => {
     const { name, value } = e.target;
     setState({
       ...state,
-      [name]: value
+      [name]: value,
     });
   };
   const reset = () => setState(initialState);

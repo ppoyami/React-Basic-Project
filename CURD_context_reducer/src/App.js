@@ -1,42 +1,43 @@
-import "./styles.css";
-import { useMemo, useReducer, createContext } from "react";
-import Pannel from "./components/Pannel";
-import UserList from "./components/UserList";
+import './styles.css';
+import { useMemo, useReducer, createContext } from 'react';
+import Pannel from './components/Pannel';
+import UserList from './components/UserList';
 
+// MEMO: reducer 함수 구성, context api로 dispatch 제공
 const initialState = {
-  users: []
+  users: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "COMMENT_CREATE":
+    case 'COMMENT_CREATE':
       return {
-        users: [...state.users, action.userComment]
+        users: [...state.users, action.userComment],
       };
-    case "COMMENT_REMOVE":
+    case 'COMMENT_REMOVE':
       return {
         ...state,
-        users: state.users.filter((user) => user.id !== action.id)
+        users: state.users.filter(user => user.id !== action.id),
       };
-    case "COMMENT_UPDATE":
+    case 'COMMENT_UPDATE':
       return {
         ...state,
-        users: state.users.map((user) =>
+        users: state.users.map(user =>
           user.id === action.id
             ? {
                 ...user,
-                comment: action.updateValue
+                comment: action.updateValue,
               }
             : user
-        )
+        ),
       };
     default:
-      return state;
+      throw new Error(`reducer function ${action.type} type not support`);
   }
 }
 
+// MEMO: 유저 테이블 만들기{유저: 댓글 수}
 function countActiveUser(users) {
-  console.log("유저 수 계산 중..");
   const userTable = users.reduce((acc, { username }) => {
     if (!acc[username]) {
       acc[username] = 1;

@@ -1,31 +1,31 @@
-import React, { useRef, useContext } from "react";
-import { UserDispatch } from "../App";
-import useInputs from "../hooks/useInputs";
+import React, { useRef, useContext } from 'react';
+import { UserDispatch } from '../App';
+import useInputs from '../hooks/useInputs';
 
 const Form = () => {
   const [formdata, onChange, reset] = useInputs({
-    username: "",
-    comment: ""
+    username: '',
+    comment: '',
   });
   const { username, comment } = formdata;
   const dispatch = useContext(UserDispatch);
 
   const inputElment = useRef(null);
   const id = useRef(1);
-
+  // MEMO: 채팅 글 생성하기 + useRef로 DOM 참조하기
   const commentCreate = () => {
     const userComment = {
       username,
       comment,
-      id: id.current
+      id: id.current,
     };
 
-    dispatch({ type: "COMMENT_CREATE", userComment });
+    dispatch({ type: 'COMMENT_CREATE', userComment });
     reset();
     id.current++;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
     commentCreate(e);
     inputElment.current.focus();

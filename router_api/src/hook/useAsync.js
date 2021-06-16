@@ -1,35 +1,36 @@
-import { useReducer } from "react";
-import api from "../api";
+import { useReducer } from 'react';
 
+// MEMO: useAsync custom hook 작성하기
 const initialState = {
   loading: false,
   data: null,
-  error: null
+  error: null,
 };
 
+// 상태 값 생성 함수를 미리 정의
 const loading = () => ({
   loading: true,
   data: null,
-  error: null
+  error: null,
 });
-const success = (data) => ({
+const success = data => ({
   loading: false,
   data,
-  error: null
+  error: null,
 });
-const error = (error) => ({
+const error = error => ({
   loading: false,
   data: null,
-  error: error
+  error: error,
 });
 
 function reducer(state, action) {
   switch (action.type) {
-    case "LOADING":
+    case 'LOADING':
       return loading();
-    case "SUCCESS":
+    case 'SUCCESS':
       return success(action.data);
-    case "ERROR":
+    case 'ERROR':
       return error(action.error);
     default:
       throw new Error(`${action.type} not supported!`);
@@ -39,13 +40,13 @@ function reducer(state, action) {
 function useAsync() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const fatchData = async (callback) => {
+  const fatchData = async callback => {
     try {
-      dispatch({ type: "LOADING" });
+      dispatch({ type: 'LOADING' });
       const data = await callback();
-      dispatch({ type: "SUCCESS", data });
+      dispatch({ type: 'SUCCESS', data });
     } catch (error) {
-      dispatch({ type: "ERROR", error });
+      dispatch({ type: 'ERROR', error });
     }
   };
 

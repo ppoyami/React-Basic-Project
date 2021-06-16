@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Table from "../components/Table";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { BsHouseFill } from "react-icons/bs";
-import TabButton from "../components/TabButton";
+import styled from 'styled-components';
+import Table from '../components/Table';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BsHouseFill } from 'react-icons/bs';
+import TabButton from '../components/TabButton';
 
 const Title = styled.h1`
   font-size: 3rem;
@@ -25,15 +25,16 @@ const Icon = styled.i`
   }
 `;
 
+// MEMO: url params 받아오기
 function Detail({
   match: {
-    params: { symbol }
+    params: { symbol },
   },
-  history: { push }
+  history: { push },
 }) {
   return (
     <>
-      <Icon onClick={() => push("/")}>
+      <Icon onClick={() => push('/')}>
         <BsHouseFill />
       </Icon>
       <Title>{symbol}</Title>

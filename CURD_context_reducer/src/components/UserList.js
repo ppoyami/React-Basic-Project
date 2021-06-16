@@ -1,20 +1,22 @@
-import React from "react";
-import { useState, useContext } from "react";
-import { UserDispatch } from "../App";
+import React from 'react';
+import { useState, useContext } from 'react';
+import { UserDispatch } from '../App';
 
 const User = ({ id, username, comment }) => {
+  // MEMO: 글 수정 모드 (조건부 렌더링)
   const [updateValue, setUpdateValue] = useState(comment);
   const [isUpdate, setIsUpdate] = useState(false);
+
   const dispatch = useContext(UserDispatch);
 
   const updateMode = () => setIsUpdate(true);
 
   const commentRemove = () => {
-    dispatch({ type: "COMMENT_REMOVE", id });
+    dispatch({ type: 'COMMENT_REMOVE', id });
   };
 
   const commentUpdate = () => {
-    dispatch({ type: "COMMENT_UPDATE", id, updateValue });
+    dispatch({ type: 'COMMENT_UPDATE', id, updateValue });
   };
 
   const updateComment = () => {
@@ -22,7 +24,7 @@ const User = ({ id, username, comment }) => {
     setIsUpdate(false);
   };
 
-  const updateChange = (e) => {
+  const updateChange = e => {
     setUpdateValue(e.target.value);
   };
 

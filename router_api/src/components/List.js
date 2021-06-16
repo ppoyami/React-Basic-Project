@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 const Ul = styled.ul`
   margin-top: 2rem;
   height: 300px;
@@ -30,6 +30,7 @@ const Li = styled.li`
   }
 `;
 
+// MEMO: 요청 상태 값에 따른 조건부 렌더링
 function List({ state }) {
   const { loading, data, error } = state;
 

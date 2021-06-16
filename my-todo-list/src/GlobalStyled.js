@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
+// MEMO: createGlobalStyle 사용하기
 const GlobalStyled = createGlobalStyle`
   html {
     font-size: 62.5%;

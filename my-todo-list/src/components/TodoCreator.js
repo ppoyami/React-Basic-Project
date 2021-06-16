@@ -1,8 +1,8 @@
-import { useState } from "react";
-import styled, { css } from "styled-components";
-import { FaCheckSquare } from "react-icons/fa";
-import Notification from "./Notification";
-import { useDispatchContext, useIdContext, useStateContext } from "../context";
+import { useState } from 'react';
+import styled, { css } from 'styled-components';
+import { FaCheckSquare } from 'react-icons/fa';
+import Notification from './Notification';
+import { useDispatchContext, useIdContext, useStateContext } from '../context';
 
 const Container = styled.div`
   position: relative;
@@ -68,30 +68,33 @@ const Input = styled.input`
 `;
 
 const Remover = styled.span``;
-
+// MEMO: useContext Custom Hook 사용해서 props 전달을 최소화 하기
 function TodoCreator({ expendible, onToggle }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
+
   const dispatch = useDispatchContext();
   const id = useIdContext();
   const todos = useStateContext();
 
-  const onChange = (e) => {
+  const onChange = e => {
     setText(e.target.value);
   };
-  const onSubmit = (e) => {
+
+  const onSubmit = e => {
     e.preventDefault();
     const todo = {
       id: ++id.current,
       text,
-      done: false
+      done: false,
     };
-    dispatch({ type: "CREATE", todo });
-    setText("");
+    dispatch({ type: 'CREATE', todo });
+    setText('');
   };
+
   return (
     <Container expendible={expendible}>
       <Notification expendible={expendible}>
-        {todos.filter((todo) => !todo.done).length}
+        {todos.filter(todo => !todo.done).length}
       </Notification>
       <Form expendible={expendible} onSubmit={onSubmit}>
         <ToggleBtn onClick={onToggle}>

@@ -1,8 +1,8 @@
-import qs from "qs";
-import styled from "styled-components";
-import useAsync from "../hook/useAsync";
-import { getBalanceSheet } from "../api";
-import { useEffect } from "react";
+import qs from 'qs';
+import styled from 'styled-components';
+import useAsync from '../hook/useAsync';
+import { getBalanceSheet } from '../api';
+import { useEffect } from 'react';
 const StyledTable = styled.table`
   width: 450px;
   height: 250px;
@@ -28,19 +28,21 @@ const Styledcol = styled.td`
   padding: 0.5rem;
 `;
 
+// MEMO: url params, url query 받아오기
 function Table({
   match: {
-    params: { symbol }
+    params: { symbol },
   },
-  location
+  location,
 }) {
+  // MEMO: qs 라이브러리 사용하기
   const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true
+    ignoreQueryPrefix: true,
   });
   const { period, last } = query;
   // 벨런시 시트 데이터 받아오기
-  const isAnnual = period === "annual";
-  const isQuarer = period === "quarter";
+  const isAnnual = period === 'annual';
+  const isQuarer = period === 'quarter';
 
   const [state, fetchData] = useAsync();
   const { loading, data, error } = state;
@@ -74,7 +76,7 @@ function Table({
       reportDate: [],
       currentCash: [],
       currentAssets: [],
-      longTermDebt: []
+      longTermDebt: [],
     }
   );
 

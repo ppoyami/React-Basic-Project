@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
+import { useEffect, useState } from 'react';
+import styled, { css, keyframes } from 'styled-components';
 
+// MEMO: styled-components 로 애니메이션 정의하기
 const SlideDown = keyframes`
   from {
     transform: translateY(-100%);
@@ -36,7 +37,7 @@ const Progress = keyframes`
     opacity: 0;
   }
 `;
-
+// MEMO: 속성에 따라 조건부 css(애니메이션) 적용하기
 const DialogBox = styled.div`
   position: fixed;
   top: 0;
@@ -94,16 +95,18 @@ const ProgressBar = styled.div`
       animation-name: ${Progress};
     `}
 `;
-
+// MEMO: 컴포넌트 내부 상태 값으로 언마운트를 지연시키기
 function Dialog({ dialog, setDialog }) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
     if (!dialog) {
-      setAnimate(true);
-      setTimeout(() => setAnimate(false), 500);
+      // 사라질 때, -> 1. 조건부 css 적용이 된다.
+      setAnimate(true); // 2. 지연 시키는 역할을 하는 상태 값을 true -> 리렌더링(사라지는 애니메이션이 진행되고)
+      setTimeout(() => setAnimate(false), 500); // false는(null을 리턴) 500ms 이후에 콜백이 실행 된다. (정말로 언마운트 됨)
     }
     if (dialog) {
+      // 마운트 될 때, 자동적으로 1250ms 이후 사라집니다.
       setTimeout(() => setDialog(false), 1250);
     }
   }, [dialog, setDialog]);
@@ -111,6 +114,7 @@ function Dialog({ dialog, setDialog }) {
   const closeDialog = () => {
     setDialog(false);
   };
+
   if (!dialog && !animate) return null;
   return (
     <DialogBox invisible={!dialog}>
