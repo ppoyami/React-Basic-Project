@@ -6,6 +6,7 @@ const useInputs = initialState => {
 
   const onChange = e => {
     const { name, value } = e.target;
+
     setState({
       ...state,
       [name]: value,

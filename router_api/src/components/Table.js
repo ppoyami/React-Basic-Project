@@ -53,7 +53,6 @@ function Table({
   }, [location.search]);
   // balancesheet
   // ! Too many re-renders.
-  // fetchData(() => getBalanceSheet(symbol)(location.search));
 
   if (!data) return null;
   if (!data.balancesheet) return null;
