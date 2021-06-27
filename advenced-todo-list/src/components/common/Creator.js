@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
+import { FiX } from 'react-icons/fi';
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -103,13 +105,23 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const CloseBtn = styled.i`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.6rem;
+  color: tomato;
+  cursor: pointer;
+`;
+
 export default function Creator({ show, close }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
-  const [text, onChange] = useInput('');
+  const [text, onChange, setText] = useInput('');
 
   const onSubmit = e => {
     e.preventDefault();
+    setText('');
     close();
   };
 
@@ -138,6 +150,9 @@ export default function Creator({ show, close }) {
   return (
     <BackGround invisible={!show}>
       <Wrapper invisible={!show}>
+        <CloseBtn onClick={close}>
+          <FiX />
+        </CloseBtn>
         <Form onSubmit={onSubmit}>
           <Input value={text} onChange={onChange} />
         </Form>

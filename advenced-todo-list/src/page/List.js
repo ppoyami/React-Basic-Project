@@ -33,7 +33,10 @@ const Body = styled.main`
 
 export default function List() {
   const [popup, setPopup] = useState(false);
-  console.log('popup', popup);
+  // BUG: 라우트 컴포넌트에 props를 넘기면서 history 객체를 받아올 수 없다.
+  // const goBack = () => {
+  //   history.goBack();
+  // };
   return (
     <Layout>
       <Header>

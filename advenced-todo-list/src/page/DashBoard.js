@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { FiPlus } from 'react-icons/fi';
@@ -8,6 +8,7 @@ import Username from '../components/DashBoard/Name';
 import Search from '../components/DashBoard/Search';
 import Board from '../components/DashBoard/Board';
 import InlineButton from '../components/common/InlineButton';
+import Creator from '../components/common/Creator';
 
 const Layout = styled.div`
   position: relative;
@@ -58,6 +59,7 @@ const StyledInlineButton = styled(InlineButton)`
 `;
 
 export default function DashBoard() {
+  const [popUp, setPopUp] = useState(false);
   return (
     <Layout>
       <Header>
@@ -70,9 +72,12 @@ export default function DashBoard() {
         <Board id="2" title="Targets" count="5" />
         <Board id="3" title="Targets" count="5" />
         <StyledInlineButton>
-          <FiPlus /> Add New Collection
+          <span onClick={() => setPopUp(true)}>
+            <FiPlus /> Add New Collection
+          </span>
         </StyledInlineButton>
       </Body>
+      <Creator show={popUp} close={() => setPopUp(false)} />
     </Layout>
   );
 }

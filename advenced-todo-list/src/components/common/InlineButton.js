@@ -12,6 +12,6 @@ const TextButton = styled.a`
   color: ${({ theme: { colors } }) => colors.color_fail};
   cursor: pointer;
 `;
-export default function InlineButton(props) {
-  return <TextButton className={props.className}>{props.children}</TextButton>;
+export default function InlineButton({ className, children }) {
+  return <TextButton className={className}>{children}</TextButton>;
 }
