@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import BackButton from '../components/List/BackButton';
 import More from '../components/List/More';
 import Item from '../components/List/Item';
+import CreateBtn from '../components/List/CreateBtn';
+import Creator from '../components/common/Creator';
 
 const Layout = styled.div`
   position: relative;
@@ -12,6 +14,8 @@ const Layout = styled.div`
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   background-color: ${({ theme: { colors } }) => colors.color_primary_light2};
+
+  overflow: hidden;
 `;
 const Header = styled.header`
   font-size: 2.5rem;
@@ -28,6 +32,8 @@ const Body = styled.main`
 `;
 
 export default function List() {
+  const [popup, setPopup] = useState(false);
+  console.log('popup', popup);
   return (
     <Layout>
       <Header>
@@ -39,6 +45,8 @@ export default function List() {
         <Item title="The Hound" isDone={false} />
         <Item title="Cersel Lannister" isDone={false} />
       </Body>
+      <CreateBtn onClick={() => setPopup(true)} />
+      <Creator show={popup} close={() => setPopup(false)} />
     </Layout>
   );
 }

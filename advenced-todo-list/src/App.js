@@ -6,6 +6,7 @@ import DashBoard from './page/DashBoard';
 import List from './page/List';
 import GlobalStyled from './global/GlobalStyled';
 import theme from './global/Theme';
+import { useState } from 'react';
 
 const AppLayout = styled.div`
   width: 100vw;
@@ -16,6 +17,10 @@ const AppLayout = styled.div`
 `;
 
 function App() {
+  const [collenctions, setCollections] = useState([]);
+  const [todos, setTodos] = useState([]);
+  // ? dashBoard: collections, addCollections(func), remainsCnt
+
   return (
     <AppLayout>
       <GlobalStyled />
