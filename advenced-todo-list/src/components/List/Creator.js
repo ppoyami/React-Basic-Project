@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
-import { FiX } from 'react-icons/fi';
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -105,13 +103,18 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const CloseBtn = styled.i`
+const CloseBtn = styled.button`
   position: absolute;
-  top: 1rem;
+  bottom: 1rem;
   right: 1rem;
-  font-size: 1.6rem;
-  color: tomato;
-  cursor: pointer;
+  font-size: 1.1rem;
+  color: #fff;
+  text-transform: uppercase;
+
+  border: none;
+  border-radius: 5px;
+  background-color: tomato;
+  padding: 0.8rem 1rem;
 `;
 
 export default function Creator({ show, close }) {
@@ -150,9 +153,7 @@ export default function Creator({ show, close }) {
   return (
     <BackGround invisible={!show}>
       <Wrapper invisible={!show}>
-        <CloseBtn onClick={close}>
-          <FiX />
-        </CloseBtn>
+        <CloseBtn onClick={close}>close</CloseBtn>
         <Form onSubmit={onSubmit}>
           <Input value={text} onChange={onChange} />
         </Form>
