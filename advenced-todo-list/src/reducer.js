@@ -41,20 +41,22 @@ function reducer(state, action) {
           ({ id }) => id !== action.collectionId
         ),
       };
-    case ADD_TODO:
-      return {
-        ...state,
-        todos: Object.assign(
-          { ...state.todos },
-          { [key]: [...state.todos[key], action.todo] }
-        ),
-      };
     case ADD_TODOS:
       return {
         ...state,
         todos: {
           ...state.todos,
           [key]: [],
+        },
+      };
+    case ADD_TODO:
+      console.log(key);
+      console.log(state.todos[key]);
+      return {
+        ...state,
+        todos: {
+          ...state.todos,
+          [key]: [...state.todos[key], action.todo],
         },
       };
     case REMOVE_TODO:

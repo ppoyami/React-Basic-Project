@@ -42,9 +42,10 @@ export default function List({
   const [popup, setPopup] = useState(false);
   const { todos } = useStateContext();
   const dispatch = useDispatchContext();
+  const parsedId = parseInt(id);
 
-  const todoList = todos[id];
-  if (!todoList) dispatch(addTodos(id));
+  const todoList = todos[parsedId];
+  if (!todoList) dispatch(addTodos(parsedId));
 
   return (
     <Layout>
@@ -54,10 +55,10 @@ export default function List({
       </Header>
       <Body>
         {todoList &&
-          todoList.map(todo => <Item title={todo.title} isDone={todo.done} />)}
+          todoList.map(todo => <Item title={todo.text} isDone={todo.done} />)}
       </Body>
       <CreateBtn onClick={() => setPopup(true)} />
-      <Creator show={popup} close={() => setPopup(false)} />
+      <Creator show={popup} close={() => setPopup(false)} searchId={parsedId} />
     </Layout>
   );
 }

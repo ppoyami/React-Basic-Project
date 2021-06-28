@@ -120,7 +120,7 @@ const CloseBtn = styled.button`
   padding: 0.8rem 1rem;
 `;
 
-export default function Creator({ show, close }) {
+export default function Creator({ show, close, searchId }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
@@ -133,7 +133,7 @@ export default function Creator({ show, close }) {
       text,
       done: false,
     };
-    dispatch(addTodo(todo));
+    dispatch(addTodo(searchId, todo));
   };
 
   const onSubmit = e => {
