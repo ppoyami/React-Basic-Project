@@ -25,12 +25,8 @@ function App() {
         <ThemeProvider theme={theme}>
           <Switch>
             <ContextProvider>
-              <Route exact path="/">
-                <Landing />
-              </Route>
-              <Route path="/dash">
-                <DashBoard />
-              </Route>
+              <Route exact path="/" component={Landing} />
+              <Route path="/dash" component={DashBoard} />
               <Route path="/list/:id" component={List} />
             </ContextProvider>
           </Switch>

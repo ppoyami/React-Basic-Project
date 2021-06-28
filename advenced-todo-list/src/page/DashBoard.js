@@ -46,6 +46,7 @@ const StyledUserImage = styled(UserImage)`
   height: 6rem;
   font-size: 3rem;
   margin-right: 1rem;
+  cursor: pointer;
 `;
 
 const StyledInlineButton = styled(InlineButton)`
@@ -60,13 +61,16 @@ const StyledInlineButton = styled(InlineButton)`
   align-items: center;
 `;
 
-export default function DashBoard() {
+export default function DashBoard({ history }) {
   const [popUp, setPopUp] = useState(false);
   const { collections } = useStateContext();
+  const goHome = () => {
+    history.push('/');
+  };
   return (
     <Layout>
       <Header>
-        <StyledUserImage />
+        <StyledUserImage onClick={goHome} />
         <Username username="Ayra" />
         <Search />
       </Header>

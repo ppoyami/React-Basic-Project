@@ -7,8 +7,8 @@ import Item from '../components/List/Item';
 import CreateBtn from '../components/List/CreateBtn';
 import Creator from '../components/List/Creator';
 
-import { addTodos } from '../reducer';
-import { useDispatchContext, useStateContext, useIdContext } from '../context';
+import { addTodos, toggleTodo } from '../reducer';
+import { useDispatchContext, useStateContext } from '../context';
 
 const Layout = styled.div`
   position: relative;
@@ -38,24 +38,36 @@ export default function List({
   match: {
     params: { id },
   },
+  history,
 }) {
   const [popup, setPopup] = useState(false);
   const { todos } = useStateContext();
   const dispatch = useDispatchContext();
+
   const parsedId = parseInt(id);
 
   const todoList = todos[parsedId];
   if (!todoList) dispatch(addTodos(parsedId));
 
+  console.log('todos:', todos);
+
   return (
     <Layout>
       <Header>
-        <BackButton />
+        <BackButton onClick={history.goBack} />
         <More />
       </Header>
       <Body>
         {todoList &&
-          todoList.map(todo => <Item title={todo.text} isDone={todo.done} />)}
+          todoList.map(todo => (
+            <Item
+              key={todo.id}
+              id={todo.id}
+              title={todo.text}
+              isDone={todo.done}
+              searchId={parsedId}
+            />
+          ))}
       </Body>
       <CreateBtn onClick={() => setPopup(true)} />
       <Creator show={popup} close={() => setPopup(false)} searchId={parsedId} />

@@ -10,7 +10,7 @@ function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const collectionId = useRef(1);
-  const todoId = useRef(1);
+  const todoId = useRef({});
 
   const id = {
     collectionId,

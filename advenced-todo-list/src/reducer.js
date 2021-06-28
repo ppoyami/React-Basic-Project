@@ -83,7 +83,7 @@ function reducer(state, action) {
         todos: {
           ...state.todos,
           [key]: state.todos[key].map(todo =>
-            todo.id === action.id ? { ...todo, done: todo.done } : todo
+            todo.id === action.id ? { ...todo, done: !todo.done } : todo
           ),
         },
       };
