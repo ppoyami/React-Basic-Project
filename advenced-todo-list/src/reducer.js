@@ -3,7 +3,6 @@ export const initialState = {
     // {
     //   id: '',
     //   title: '',
-    //   remains: '',
     // },
   ],
   todos: {
@@ -20,7 +19,8 @@ export const initialState = {
 
 const ADD_COLLECTION = 'collection/add';
 const REMOVE_COLLECTION = 'collection/remove';
-const ADD_TODO = 'todo/add'; // collection id, todo id, text
+const ADD_TODO = 'todo/add';
+const ADD_TODOS = 'todos/add';
 const REMOVE_TODO = 'todo/remove';
 const UPDATE_TODO = 'todo/update';
 const TOGGLE_TODO = 'todo/toggle';
@@ -48,6 +48,14 @@ function reducer(state, action) {
           { ...state.todos },
           { key: [...state.todos[key], action.todo] }
         ),
+      };
+    case ADD_TODOS:
+      return {
+        ...state,
+        todos: {
+          ...state.todos,
+          key: [],
+        },
       };
     case REMOVE_TODO:
       return {
@@ -90,6 +98,12 @@ export const removeCollection = collectionId => ({
   type: REMOVE_COLLECTION,
   collectionId,
 });
+
+export const addTodos = collectionId => ({
+  type: ADD_TODOS,
+  collectionId,
+});
+
 export const addTodo = (collectionId, todo) => ({
   type: ADD_TODO,
   collectionId,

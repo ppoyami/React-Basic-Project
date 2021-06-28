@@ -30,9 +30,9 @@ const Progress = styled.span`
   align-items: center;
 `;
 
-export default function Board({ title, count }) {
+export default function Board({ id, title, count }) {
   return (
-    <Wrapper to={`/list`}>
+    <Wrapper to={`/list/${id}`}>
       <Title>{title}</Title>
       <Progress>{count}</Progress>
     </Wrapper>

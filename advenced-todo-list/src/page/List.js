@@ -7,6 +7,9 @@ import Item from '../components/List/Item';
 import CreateBtn from '../components/List/CreateBtn';
 import Creator from '../components/List/Creator';
 
+import { addTodos } from '../reducer';
+import { useDispatchContext, useStateContext, useIdContext } from '../context';
+
 const Layout = styled.div`
   position: relative;
   width: 320px;
@@ -31,15 +34,31 @@ const Body = styled.main`
   padding: 1rem;
 `;
 
-export default function List() {
+export default function List({
+  match: {
+    params: { id },
+  },
+}) {
   const [popup, setPopup] = useState(false);
+  const { todos } = useStateContext();
+  const dispatch = useDispatchContext();
+
+  console.log(todos);
+  console.log(id);
+
+  const todoList = todos[id];
+  if (!todoList) dispatch(addTodos(id));
+
   return (
     <Layout>
       <Header>
         <BackButton />
         <More />
       </Header>
-      <Body></Body>
+      <Body>
+        {todoList &&
+          todoList.map(todo => <Item title={todo.title} isDone={todo.done} />)}
+      </Body>
       <CreateBtn onClick={() => setPopup(true)} />
       <Creator show={popup} close={() => setPopup(false)} />
     </Layout>

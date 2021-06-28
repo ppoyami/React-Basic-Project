@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
+import { addCollection } from '../../reducer';
+import { useDispatchContext, useIdContext } from '../../context';
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -124,8 +126,19 @@ export default function Creator({ show, close }) {
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
 
+  const dispatch = useDispatchContext();
+  const { collectionId } = useIdContext();
+  const onCreateCollection = () => {
+    const newCollection = {
+      id: collectionId.current++,
+      title: text,
+    };
+    dispatch(addCollection(newCollection));
+  };
+
   const onSubmit = e => {
     e.preventDefault();
+    onCreateCollection();
     setText('');
     close();
   };

@@ -10,6 +10,8 @@ import Board from '../components/DashBoard/Board';
 import InlineButton from '../components/common/InlineButton';
 import Creator from '../components/DashBoard/Creator';
 
+import { useStateContext } from '../context';
+
 const Layout = styled.div`
   position: relative;
   width: 320px;
@@ -60,6 +62,7 @@ const StyledInlineButton = styled(InlineButton)`
 
 export default function DashBoard() {
   const [popUp, setPopUp] = useState(false);
+  const { collections } = useStateContext();
   return (
     <Layout>
       <Header>
@@ -69,6 +72,9 @@ export default function DashBoard() {
       </Header>
       <Body>
         {/* collection rendering... */}
+        {collections.map(({ id, title }) => (
+          <Board key={id} id={id} title={title} count="3" />
+        ))}
         {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         <StyledInlineButton>
           <span onClick={() => setPopUp(true)}>
