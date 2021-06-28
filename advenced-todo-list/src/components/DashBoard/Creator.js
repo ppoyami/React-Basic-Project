@@ -119,20 +119,13 @@ const CloseBtn = styled.button`
   cursor: pointer;
 `;
 
-export default function Creator({ show, close, addCollections }) {
+export default function Creator({ show, close }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
-  const id = useRef(1);
 
   const onSubmit = e => {
     e.preventDefault();
-    const collection = {
-      id: id.current,
-      title: text,
-    };
-    addCollections(collection);
-    id.current++;
     setText('');
     close();
   };

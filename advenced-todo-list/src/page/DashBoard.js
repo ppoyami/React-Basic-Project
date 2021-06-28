@@ -58,12 +58,7 @@ const StyledInlineButton = styled(InlineButton)`
   align-items: center;
 `;
 
-export default function DashBoard({
-  id,
-  collections,
-  addCollections,
-  calcRemains,
-}) {
+export default function DashBoard() {
   const [popUp, setPopUp] = useState(false);
   return (
     <Layout>
@@ -75,21 +70,13 @@ export default function DashBoard({
       <Body>
         {/* collection rendering... */}
         {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
-        {collections.map(({ id, title }) => (
-          <Board key={id} title={title} count="5" />
-        ))}
         <StyledInlineButton>
           <span onClick={() => setPopUp(true)}>
             <FiPlus /> Add New Collection
           </span>
         </StyledInlineButton>
       </Body>
-      <Creator
-        id={id}
-        show={popUp}
-        close={() => setPopUp(false)}
-        addCollections={addCollections}
-      />
+      <Creator show={popUp} close={() => setPopUp(false)} />
     </Layout>
   );
 }

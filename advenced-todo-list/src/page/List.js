@@ -31,34 +31,15 @@ const Body = styled.main`
   padding: 1rem;
 `;
 
-export default function List({ searchId, addTodos, todos }) {
+export default function List() {
   const [popup, setPopup] = useState(false);
-  // BUG: 라우트 컴포넌트에 props를 넘기면서 history, match 객체를 받아올 수 없다.
-  // const goBack = () => {
-  //   history.goBack();
-  // };
-  // console.log(match);
-  // 키 값 탐색 -> 있으면 [] 가져오고, 없으면 String(searchId): [] 를 생성
-  const key = searchId.current + '';
-  // BUG: todos[key] 없으면 새로 만들어주는데, 렌더링이 안됌
-  const todoList = todos[key];
-  if (!todoList) addTodos({ key: [] });
-
-  console.log(key);
-  console.log(todos);
-
   return (
     <Layout>
       <Header>
         <BackButton />
         <More />
       </Header>
-      <Body>
-        {todoList &&
-          todoList.map(todo => (
-            <Item key={todo.id} title={todo.title} isDone={todo.done} />
-          ))}
-      </Body>
+      <Body></Body>
       <CreateBtn onClick={() => setPopup(true)} />
       <Creator show={popup} close={() => setPopup(false)} />
     </Layout>
