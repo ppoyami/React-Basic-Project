@@ -46,7 +46,7 @@ function reducer(state, action) {
         ...state,
         todos: Object.assign(
           { ...state.todos },
-          { key: [...state.todos[key], action.todo] }
+          { [key]: [...state.todos[key], action.todo] }
         ),
       };
     case ADD_TODOS:
@@ -54,7 +54,7 @@ function reducer(state, action) {
         ...state,
         todos: {
           ...state.todos,
-          key: [],
+          [key]: [],
         },
       };
     case REMOVE_TODO:
@@ -62,7 +62,7 @@ function reducer(state, action) {
         ...state,
         todos: {
           ...state.todos,
-          key: state.todos[key].filter(todo => todo.id !== action.id),
+          [key]: state.todos[key].filter(todo => todo.id !== action.id),
         },
       };
     case UPDATE_TODO:
@@ -70,7 +70,7 @@ function reducer(state, action) {
         ...state,
         todos: {
           ...state.todos,
-          key: state.todos[key].map(todo =>
+          [key]: state.todos[key].map(todo =>
             todo.id === action.id ? { ...todo, text: action.text } : todo
           ),
         },
@@ -80,7 +80,7 @@ function reducer(state, action) {
         ...state,
         todos: {
           ...state.todos,
-          key: state.todos[key].map(todo =>
+          [key]: state.todos[key].map(todo =>
             todo.id === action.id ? { ...todo, done: todo.done } : todo
           ),
         },

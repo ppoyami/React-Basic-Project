@@ -43,9 +43,6 @@ export default function List({
   const { todos } = useStateContext();
   const dispatch = useDispatchContext();
 
-  console.log(todos);
-  console.log(id);
-
   const todoList = todos[id];
   if (!todoList) dispatch(addTodos(id));
 
