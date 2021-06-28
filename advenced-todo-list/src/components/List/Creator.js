@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
+import { addTodo } from '../../reducer';
+import { useDispatchContext, useIdContext } from '../../context';
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -121,9 +124,21 @@ export default function Creator({ show, close }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
+  const { todoId } = useIdContext();
+  const dispatch = useDispatchContext();
+
+  const onCreateTodo = () => {
+    const todo = {
+      id: todoId.current++,
+      text,
+      done: false,
+    };
+    dispatch(addTodo(todo));
+  };
 
   const onSubmit = e => {
     e.preventDefault();
+    onCreateTodo();
     setText('');
     close();
   };
