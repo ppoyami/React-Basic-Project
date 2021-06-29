@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FiCheck } from 'react-icons/fi';
+
+import { toggleTodo, removeTodo, updateTodo } from '../../reducer';
+import { useDispatchContext } from '../../context';
+
+import { FiTrash } from 'react-icons/fi';
+import useInput from '../../hooks/useInput';
 
 const Wrapper = styled.div`
   width: 90%;
@@ -12,7 +18,6 @@ const Wrapper = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   ${({ done }) =>
     done &&
@@ -34,6 +39,7 @@ const Wrapper = styled.div`
 const Title = styled.span`
   font-size: 1.2rem;
   font-family: bold;
+  margin-right: auto;
 `;
 const CheckBtn = styled.a`
   width: 2.2rem;
@@ -49,11 +55,56 @@ const Checked = styled(FiCheck)`
   color: 1px solid ${({ theme: { colors } }) => colors.color_check};
 `;
 
-export default function Item({ title, isDone }) {
+const Remover = styled(FiTrash)`
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+  &:hover {
+    color: tomato;
+  }
+`;
+
+const UpdateInput = styled.input``;
+
+export default function Item({ id, title, isDone, searchId }) {
+  const dispatch = useDispatchContext();
+  const [update, setUpdate] = useState(false);
+  const [updateText, onChange] = useInput(title);
+
+  const onToggle = () => {
+    dispatch(toggleTodo(searchId, id));
+  };
+
+  const onRemoveTodo = () => {
+    dispatch(removeTodo(searchId, id));
+  };
+
+  const onUpdateTodo = e => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      console.log('update');
+      dispatch(updateTodo(searchId, id, updateText));
+      setUpdate(prev => !prev);
+    }
+  };
   return (
-    <Wrapper done={isDone}>
-      <Title>{title}</Title>
-      {isDone ? <Checked /> : <CheckBtn />}
+    <Wrapper done={isDone} onDoubleClick={() => setUpdate(prev => !prev)}>
+      {update ? (
+        <UpdateInput
+          value={updateText}
+          onChange={onChange}
+          onKeyPress={onUpdateTodo}
+        />
+      ) : (
+        <Title>{title}</Title>
+      )}
+
+      {isDone ? (
+        <Checked onClick={onToggle} />
+      ) : (
+        <CheckBtn onClick={onToggle} />
+      )}
+      <Remover onClick={onRemoveTodo} />
     </Wrapper>
   );
 }

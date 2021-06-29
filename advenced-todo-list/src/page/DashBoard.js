@@ -10,6 +10,8 @@ import Board from '../components/DashBoard/Board';
 import InlineButton from '../components/common/InlineButton';
 import Creator from '../components/DashBoard/Creator';
 
+import { useStateContext } from '../context';
+
 const Layout = styled.div`
   position: relative;
   width: 320px;
@@ -44,6 +46,7 @@ const StyledUserImage = styled(UserImage)`
   height: 6rem;
   font-size: 3rem;
   margin-right: 1rem;
+  cursor: pointer;
 `;
 
 const StyledInlineButton = styled(InlineButton)`
@@ -58,38 +61,32 @@ const StyledInlineButton = styled(InlineButton)`
   align-items: center;
 `;
 
-export default function DashBoard({
-  id,
-  collections,
-  addCollections,
-  calcRemains,
-}) {
+export default function DashBoard({ history }) {
   const [popUp, setPopUp] = useState(false);
+  const { collections } = useStateContext();
+  const goHome = () => {
+    history.push('/');
+  };
   return (
     <Layout>
       <Header>
-        <StyledUserImage />
+        <StyledUserImage onClick={goHome} />
         <Username username="Ayra" />
         <Search />
       </Header>
       <Body>
         {/* collection rendering... */}
-        {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         {collections.map(({ id, title }) => (
-          <Board key={id} title={title} count="5" />
+          <Board key={id} id={id} title={title} />
         ))}
+        {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         <StyledInlineButton>
           <span onClick={() => setPopUp(true)}>
             <FiPlus /> Add New Collection
           </span>
         </StyledInlineButton>
       </Body>
-      <Creator
-        id={id}
-        show={popUp}
-        close={() => setPopUp(false)}
-        addCollections={addCollections}
-      />
+      <Creator show={popUp} close={() => setPopUp(false)} />
     </Layout>
   );
 }

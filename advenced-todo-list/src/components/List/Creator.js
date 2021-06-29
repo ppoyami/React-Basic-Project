@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
+import { addTodo } from '../../reducer';
+import { useDispatchContext, useIdContext } from '../../context';
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -71,7 +74,7 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 
   width: 80%;
-  height: 20%;
+  height: 30%;
   background-color: #fff;
   border-radius: 5px;
   z-index: 100;
@@ -117,13 +120,30 @@ const CloseBtn = styled.button`
   padding: 0.8rem 1rem;
 `;
 
-export default function Creator({ show, close }) {
+export default function Creator({ show, close, searchId }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
 
+  const { todoId } = useIdContext();
+  const dispatch = useDispatchContext();
+
+  if (!todoId.current[searchId]) todoId.current[searchId] = 1;
+
+  console.log('개별 todo id', todoId.current[searchId]);
+
+  const onCreateTodo = () => {
+    const todo = {
+      id: todoId.current[searchId]++,
+      text,
+      done: false,
+    };
+    dispatch(addTodo(searchId, todo));
+  };
+
   const onSubmit = e => {
     e.preventDefault();
+    onCreateTodo();
     setText('');
     close();
   };

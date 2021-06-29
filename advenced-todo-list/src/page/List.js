@@ -7,6 +7,9 @@ import Item from '../components/List/Item';
 import CreateBtn from '../components/List/CreateBtn';
 import Creator from '../components/List/Creator';
 
+import { addTodos, toggleTodo } from '../reducer';
+import { useDispatchContext, useStateContext } from '../context';
+
 const Layout = styled.div`
   position: relative;
   width: 320px;
@@ -31,36 +34,43 @@ const Body = styled.main`
   padding: 1rem;
 `;
 
-export default function List({ searchId, addTodos, todos }) {
+export default function List({
+  match: {
+    params: { id },
+  },
+  history,
+}) {
   const [popup, setPopup] = useState(false);
-  // BUG: 라우트 컴포넌트에 props를 넘기면서 history, match 객체를 받아올 수 없다.
-  // const goBack = () => {
-  //   history.goBack();
-  // };
-  // console.log(match);
-  // 키 값 탐색 -> 있으면 [] 가져오고, 없으면 String(searchId): [] 를 생성
-  const key = searchId.current + '';
-  // BUG: todos[key] 없으면 새로 만들어주는데, 렌더링이 안됌
-  const todoList = todos[key];
-  if (!todoList) addTodos({ key: [] });
+  const { todos } = useStateContext();
+  const dispatch = useDispatchContext();
 
-  console.log(key);
-  console.log(todos);
+  const parsedId = parseInt(id);
+
+  const todoList = todos[parsedId];
+  if (!todoList) dispatch(addTodos(parsedId));
+
+  console.log('todos:', todos);
 
   return (
     <Layout>
       <Header>
-        <BackButton />
+        <BackButton onClick={history.goBack} />
         <More />
       </Header>
       <Body>
         {todoList &&
           todoList.map(todo => (
-            <Item key={todo.id} title={todo.title} isDone={todo.done} />
+            <Item
+              key={todo.id}
+              id={todo.id}
+              title={todo.text}
+              isDone={todo.done}
+              searchId={parsedId}
+            />
           ))}
       </Body>
       <CreateBtn onClick={() => setPopup(true)} />
-      <Creator show={popup} close={() => setPopup(false)} />
+      <Creator show={popup} close={() => setPopup(false)} searchId={parsedId} />
     </Layout>
   );
 }

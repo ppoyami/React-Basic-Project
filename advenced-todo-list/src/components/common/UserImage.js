@@ -15,7 +15,7 @@ const Layout = styled.div`
 
 export default function UserImage(props) {
   return (
-    <Layout className={props.className}>
+    <Layout className={props.className} onClick={props.onClick}>
       <FiUser />
     </Layout>
   );
