@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { FiCheck } from 'react-icons/fi';
 
@@ -6,6 +6,7 @@ import { toggleTodo, removeTodo, updateTodo } from '../../reducer';
 import { useDispatchContext } from '../../context';
 
 import { FiTrash } from 'react-icons/fi';
+import useInput from '../../hooks/useInput';
 
 const Wrapper = styled.div`
   width: 90%;
@@ -63,8 +64,12 @@ const Remover = styled(FiTrash)`
   }
 `;
 
+const UpdateInput = styled.input``;
+
 export default function Item({ id, title, isDone, searchId }) {
   const dispatch = useDispatchContext();
+  const [update, setUpdate] = useState(false);
+  const [updateText, onChange] = useInput(title);
 
   const onToggle = () => {
     dispatch(toggleTodo(searchId, id));
@@ -74,12 +79,26 @@ export default function Item({ id, title, isDone, searchId }) {
     dispatch(removeTodo(searchId, id));
   };
 
-  const onUpdateTodo = () => {
-    dispatch(updateTodo(searchId, id));
+  const onUpdateTodo = e => {
+    console.log(e.key);
+    if (e.key === 'Enter') {
+      console.log('update');
+      dispatch(updateTodo(searchId, id, updateText));
+      setUpdate(prev => !prev);
+    }
   };
   return (
-    <Wrapper done={isDone}>
-      <Title>{title}</Title>
+    <Wrapper done={isDone} onDoubleClick={() => setUpdate(prev => !prev)}>
+      {update ? (
+        <UpdateInput
+          value={updateText}
+          onChange={onChange}
+          onKeyPress={onUpdateTodo}
+        />
+      ) : (
+        <Title>{title}</Title>
+      )}
+
       {isDone ? (
         <Checked onClick={onToggle} />
       ) : (

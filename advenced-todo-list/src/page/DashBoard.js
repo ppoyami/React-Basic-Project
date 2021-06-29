@@ -77,7 +77,7 @@ export default function DashBoard({ history }) {
       <Body>
         {/* collection rendering... */}
         {collections.map(({ id, title }) => (
-          <Board key={id} id={id} title={title} count="3" />
+          <Board key={id} id={id} title={title} />
         ))}
         {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         <StyledInlineButton>

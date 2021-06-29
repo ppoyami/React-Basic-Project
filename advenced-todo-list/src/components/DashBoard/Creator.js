@@ -130,9 +130,10 @@ export default function Creator({ show, close }) {
   const { collectionId } = useIdContext();
   const onCreateCollection = () => {
     const newCollection = {
-      id: collectionId.current++,
+      id: collectionId.current + '',
       title: text,
     };
+    collectionId.current++;
     dispatch(addCollection(newCollection));
   };
 
