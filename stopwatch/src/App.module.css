@@ -1,0 +1,30 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #495057;
+}
+
+.wrapper {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  background-color: #fcc419;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1.5rem;
+  border: 3px solid #748ffc;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
