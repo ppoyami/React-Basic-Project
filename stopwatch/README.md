@@ -21,3 +21,31 @@
 ---
 
 ## code snippets
+
+1. useRef로 타이머 변수를 관리하기
+   - `let timerId;` 였다면, 함수 호출마다 undefined 가 될 것이다.
+
+```js
+function App() {
+   ... 생략
+   const timerId = useRef(null);
+
+   useEffect(() => {
+   if (running) {
+      // setInterval 등록,
+      timerId.current = setInterval(() => {
+         setMilliSeconds(prev => prev + 10);
+      }, 10);
+   }
+   if (initial) {
+      // setInterval 해제
+      clearInterval(timerId.current);
+      // milliSeconds 초기화
+      setMilliSeconds(0);
+   }
+   if (pause) {
+      // setInterval 해제
+      clearInterval(timerId.current);
+   }
+   }, [initial, running, pause]);
+```
