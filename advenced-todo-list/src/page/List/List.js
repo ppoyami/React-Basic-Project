@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import BackButton from '../components/List/BackButton';
-import More from '../components/List/More';
-import Item from '../components/List/Item';
-import CreateBtn from '../components/List/CreateBtn';
-import Creator from '../components/List/Creator';
-
-import { addTodos, toggleTodo } from '../reducer';
-import { useDispatchContext, useStateContext } from '../context';
+import BackButton from '../../components/List/BackButton';
+import More from '../../components/List/More';
+import Item from '../../components/List/Item';
+import CreateBtn from '../../components/List/CreateBtn';
+import Creator from '../../components/List/Creator';
 
 const Layout = styled.div`
   position: relative;
@@ -35,42 +32,44 @@ const Body = styled.main`
 `;
 
 export default function List({
-  match: {
-    params: { id },
-  },
-  history,
+  todos,
+  onAddTodos,
+  goBack,
+  onCreateTodo,
+  onToggle,
+  onRemoveTodo,
+  onUpdateTodo,
 }) {
   const [popup, setPopup] = useState(false);
-  const { todos } = useStateContext();
-  const dispatch = useDispatchContext();
 
-  const parsedId = parseInt(id);
-
-  const todoList = todos[parsedId];
-  if (!todoList) dispatch(addTodos(parsedId));
-
-  console.log('todos:', todos);
+  if (!todos) onAddTodos();
 
   return (
     <Layout>
       <Header>
-        <BackButton onClick={history.goBack} />
+        <BackButton onClick={goBack} />
         <More />
       </Header>
       <Body>
-        {todoList &&
-          todoList.map(todo => (
+        {todos &&
+          todos.map(todo => (
             <Item
               key={todo.id}
               id={todo.id}
               title={todo.text}
               isDone={todo.done}
-              searchId={parsedId}
+              onToggle={onToggle}
+              onRemoveTodo={onRemoveTodo}
+              onUpdateTodo={onUpdateTodo}
             />
           ))}
       </Body>
       <CreateBtn onClick={() => setPopup(true)} />
-      <Creator show={popup} close={() => setPopup(false)} searchId={parsedId} />
+      <Creator
+        show={popup}
+        close={() => setPopup(false)}
+        onCreateTodo={onCreateTodo}
+      />
     </Layout>
   );
 }

@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import useInput from '../../hooks/useInput';
 
-import { addTodo } from '../../reducer';
-import { useDispatchContext, useIdContext } from '../../context';
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -120,30 +117,14 @@ const CloseBtn = styled.button`
   padding: 0.8rem 1rem;
 `;
 
-export default function Creator({ show, close, searchId }) {
+export default function Creator({ show, close, onCreateTodo }) {
   const [animation, setAnimation] = useState(false);
   const [localVisible, setLocalVisible] = useState(show);
   const [text, onChange, setText] = useInput('');
 
-  const { todoId } = useIdContext();
-  const dispatch = useDispatchContext();
-
-  if (!todoId.current[searchId]) todoId.current[searchId] = 1;
-
-  console.log('개별 todo id', todoId.current[searchId]);
-
-  const onCreateTodo = () => {
-    const todo = {
-      id: todoId.current[searchId]++,
-      text,
-      done: false,
-    };
-    dispatch(addTodo(searchId, todo));
-  };
-
   const onSubmit = e => {
     e.preventDefault();
-    onCreateTodo();
+    onCreateTodo(text);
     setText('');
     close();
   };

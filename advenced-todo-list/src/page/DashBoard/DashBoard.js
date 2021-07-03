@@ -3,14 +3,12 @@ import styled from 'styled-components';
 
 import { FiPlus } from 'react-icons/fi';
 
-import UserImage from '../components/common/UserImage';
-import Username from '../components/DashBoard/Name';
-import Search from '../components/DashBoard/Search';
-import Board from '../components/DashBoard/Board';
-import InlineButton from '../components/common/InlineButton';
-import Creator from '../components/DashBoard/Creator';
-
-import { useStateContext } from '../context';
+import UserImage from '../../components/common/UserImage';
+import Username from '../../components/DashBoard/Name';
+import Search from '../../components/DashBoard/Search';
+import Board from '../../components/DashBoard/Board';
+import InlineButton from '../../components/common/InlineButton';
+import Creator from '../../components/DashBoard/Creator';
 
 const Layout = styled.div`
   position: relative;
@@ -61,12 +59,14 @@ const StyledInlineButton = styled(InlineButton)`
   align-items: center;
 `;
 
-export default function DashBoard({ history }) {
+export default function DashBoard({
+  collections,
+  goHome,
+  onCreateCollection,
+  getCount,
+}) {
   const [popUp, setPopUp] = useState(false);
-  const { collections } = useStateContext();
-  const goHome = () => {
-    history.push('/');
-  };
+
   return (
     <Layout>
       <Header>
@@ -77,7 +77,7 @@ export default function DashBoard({ history }) {
       <Body>
         {/* collection rendering... */}
         {collections.map(({ id, title }) => (
-          <Board key={id} id={id} title={title} />
+          <Board key={id} id={id} title={title} getCount={getCount} />
         ))}
         {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         <StyledInlineButton>
@@ -86,7 +86,11 @@ export default function DashBoard({ history }) {
           </span>
         </StyledInlineButton>
       </Body>
-      <Creator show={popUp} close={() => setPopUp(false)} />
+      <Creator
+        show={popUp}
+        close={() => setPopUp(false)}
+        onCreateCollection={onCreateCollection}
+      />
     </Layout>
   );
 }

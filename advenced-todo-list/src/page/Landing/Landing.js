@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import DropDown from '../components/Landing/DropDown';
-import UserImage from '../components/common/UserImage';
-import Welcome from '../components/Landing/Welcome';
-import PasswordInput from '../components/Landing/PasswordInput';
-import LoginButton from '../components/Landing/LoginButton';
-import InlineButton from '../components/common/InlineButton';
+import DropDown from '../../components/Landing/DropDown';
+import UserImage from '../../components/common/UserImage';
+import Welcome from '../../components/Landing/Welcome';
+import PasswordInput from '../../components/Landing/PasswordInput';
+import LoginButton from '../../components/Landing/LoginButton';
+import InlineButton from '../../components/common/InlineButton';
 
 const LandingLayout = styled.div`
   position: relative;

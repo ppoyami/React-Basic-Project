@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from './page/Landing';
 import DashBoard from './page/DashBoard';
 import List from './page/List';
+
 import GlobalStyled from './global/GlobalStyled';
 import theme from './global/Theme';
 
