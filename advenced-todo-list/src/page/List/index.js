@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useTodoId } from '../../context';
 import {
   addTodos,
   addTodo,
@@ -18,8 +19,7 @@ export default function ListContainer({
   history,
 }) {
   const parsedId = parseInt(id);
-
-  const todoId = useRef({});
+  const todoId = useTodoId();
 
   const todos = useSelector(state => state.todos[parsedId]);
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export default function ListContainer({
     dispatch(toggleTodo(parsedId, id));
   };
 
-  const onRemoveTodo = () => {
+  const onRemoveTodo = id => {
     dispatch(removeTodo(parsedId, id));
   };
 

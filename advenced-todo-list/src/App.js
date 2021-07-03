@@ -8,8 +8,6 @@ import List from './page/List';
 import GlobalStyled from './global/GlobalStyled';
 import theme from './global/Theme';
 
-import ContextProvider from './context';
-
 const AppLayout = styled.div`
   width: 100vw;
   height: 100vh;
@@ -25,11 +23,9 @@ function App() {
       <Router>
         <ThemeProvider theme={theme}>
           <Switch>
-            <ContextProvider>
-              <Route exact path="/" component={Landing} />
-              <Route path="/dash" component={DashBoard} />
-              <Route path="/list/:id" component={List} />
-            </ContextProvider>
+            <Route exact path="/" component={Landing} />
+            <Route path="/dash" component={DashBoard} />
+            <Route path="/list/:id" component={List} />
           </Switch>
         </ThemeProvider>
       </Router>

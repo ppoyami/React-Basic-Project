@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { addCollection } from '../../modules/collections';
+import { useCollectioId } from '../../context';
 
 import DashBoard from './DashBoard';
 
 export default function DashBoardContainer({ history }) {
   const { collections, todos } = useSelector(state => state);
   const dispatch = useDispatch();
-  // BUG: 함수 호출될 때마다, 초기화 된다.
-  const collectionId = useRef(0);
+
+  const collectionId = useCollectioId();
 
   const goHome = () => {
     history.push('/');
@@ -24,7 +25,8 @@ export default function DashBoardContainer({ history }) {
     dispatch(addCollection(collection));
   };
 
-  const getCount = id => (todos[id] ? todos[id].length : 0);
+  const getCount = id =>
+    todos[id] ? todos[id].filter(todo => !todo.done).length : 0;
 
   const props = {
     collections,
