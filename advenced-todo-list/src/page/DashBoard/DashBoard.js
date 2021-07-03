@@ -71,15 +71,13 @@ export default function DashBoard({
     <Layout>
       <Header>
         <StyledUserImage onClick={goHome} />
-        <Username username="Ayra" />
+        <Username username="username" />
         <Search />
       </Header>
       <Body>
-        {/* collection rendering... */}
         {collections.map(({ id, title }) => (
           <Board key={id} id={id} title={title} getCount={getCount} />
         ))}
-        {/* calcRemains를 각 Board 마다 실행해서 결과받아 표시 */}
         <StyledInlineButton>
           <span onClick={() => setPopUp(true)}>
             <FiPlus /> Add New Collection

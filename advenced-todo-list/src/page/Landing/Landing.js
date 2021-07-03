@@ -28,7 +28,7 @@ export default function Landing() {
     <LandingLayout>
       <DropDown />
       <UserImage />
-      <Welcome username="Arya" />
+      <Welcome username="username" />
       <PasswordInput />
       <Link to="/dash">
         <LoginButton />
