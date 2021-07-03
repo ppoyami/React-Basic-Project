@@ -1,47 +1,27 @@
-import { createContext, useReducer, useContext, useRef } from 'react';
+import { createContext, useContext, useRef } from 'react';
 
-import reducer, { initialState } from './reducer';
+const CollectionIdContext = createContext(null);
+const TodoIdContext = createContext(null);
 
-const StateContext = createContext(null);
-const DispatchContext = createContext(null);
-const IdContext = createContext(null);
-
-function ContextProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const collectionId = useRef(1);
+export default function ContextProvider({ children }) {
+  const collectionId = useRef(0);
   const todoId = useRef({});
 
-  const id = {
-    collectionId,
-    todoId,
-  };
-
   return (
-    <StateContext.Provider value={state}>
-      <DispatchContext.Provider value={dispatch}>
-        <IdContext.Provider value={id}>{children}</IdContext.Provider>
-      </DispatchContext.Provider>
-    </StateContext.Provider>
+    <CollectionIdContext.Provider value={collectionId}>
+      <TodoIdContext.Provider value={todoId}>{children}</TodoIdContext.Provider>
+    </CollectionIdContext.Provider>
   );
 }
 
-export const useStateContext = () => {
-  const context = useContext(StateContext);
-  if (!context) throw new Error('invalid Context');
+export const useCollectioId = () => {
+  const context = useContext(CollectionIdContext);
+  if (!context) throw new Error('CollectionIdContext error');
   return context;
 };
 
-export const useDispatchContext = () => {
-  const context = useContext(DispatchContext);
-  if (!context) throw new Error('invalid Context');
+export const useTodoId = () => {
+  const context = useContext(TodoIdContext);
+  if (!context) throw new Error('TodoIdContext error');
   return context;
 };
-
-export const useIdContext = () => {
-  const context = useContext(IdContext);
-  if (!context) throw new Error('invalid Context');
-  return context;
-};
-
-export default ContextProvider;

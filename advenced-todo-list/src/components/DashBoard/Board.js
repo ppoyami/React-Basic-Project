@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useStateContext } from '../../context';
-
 const Wrapper = styled(Link)`
   width: 90%;
   height: 70px;
@@ -32,11 +30,8 @@ const Progress = styled.span`
   align-items: center;
 `;
 
-export default function Board({ id, title }) {
-  const { todos } = useStateContext();
-  const todolist = todos[id];
-  let count = 0;
-  if (todolist) count = todolist.filter(todo => !todo.done).length;
+export default function Board({ id, title, getCount }) {
+  const count = getCount(id);
   return (
     <Wrapper to={`/list/${id}`}>
       <Title>{title}</Title>
