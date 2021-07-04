@@ -1,15 +1,24 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
 
-import { ThemeProvider } from "styled-components";
-import App from "./App";
-import { colors } from "./GlobalStyled";
+import { ThemeProvider } from 'styled-components';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-const rootElement = document.getElementById("root");
+import App from './App';
+import { colors } from './GlobalStyled';
+import rootReducer from './modules';
+
+const rootElement = document.getElementById('root');
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 ReactDOM.render(
   <StrictMode>
     <ThemeProvider theme={colors}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ThemeProvider>
   </StrictMode>,
   rootElement

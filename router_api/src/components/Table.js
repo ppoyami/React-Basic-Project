@@ -1,8 +1,10 @@
 import qs from 'qs';
 import styled from 'styled-components';
-import useAsync from '../hook/useAsync';
-import { getBalanceSheet } from '../api';
+
 import { useEffect } from 'react';
+
+import { getSheet } from '../modules/sheet';
+import { useDispatch, useSelector } from 'react-redux';
 const StyledTable = styled.table`
   width: 450px;
   height: 250px;
@@ -35,24 +37,17 @@ function Table({
   },
   location,
 }) {
-  // MEMO: qs 라이브러리 사용하기
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const { period, last } = query;
-  // 벨런시 시트 데이터 받아오기
-  const isAnnual = period === 'annual';
-  const isQuarer = period === 'quarter';
+  // // MEMO: qs 라이브러리 사용하기
+  // const query = qs.parse(location.search, {
+  //   ignoreQueryPrefix: true,
+  // });
 
-  const [state, fetchData] = useAsync();
-  const { loading, data, error } = state;
+  const dispatch = useDispatch();
+  const { loading, data, error } = useSelector(state => state.sheet);
 
-  // ! Too many re-renders.
   useEffect(() => {
-    fetchData(() => getBalanceSheet(symbol)(location.search));
-  }, [location.search]);
-  // balancesheet
-  // ! Too many re-renders.
+    dispatch(getSheet(symbol, location.search));
+  }, []);
 
   if (!data) return null;
   if (!data.balancesheet) return null;

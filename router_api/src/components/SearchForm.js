@@ -1,6 +1,8 @@
-import styled from "styled-components";
-import useInput from "../hook/useInput";
-import { searchSymbols } from "../api";
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+
+import useInput from '../hook/useInput';
+import { getSymbols } from '../modules/symbols';
 
 const Form = styled.form`
   width: 100%;
@@ -12,19 +14,20 @@ const Input = styled.input`
   border-radius: 3px;
   box-shadow: 0px 0px 4px 4px inset ${({ theme }) => theme.color_primary__dark};
   background: transparent;
-  font-family: "Cinzel", "serif";
+  font-family: 'Cinzel', 'serif';
   color: white;
   &:focus {
     outline: none;
   }
 `;
 
-function SearchForm({ fetchData }) {
-  const [value, onChange] = useInput("AAPL");
+function SearchForm() {
+  const [value, onChange] = useInput('AAPL');
+  const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault();
-    fetchData(() => searchSymbols(value));
+    dispatch(getSymbols(value));
   };
 
   return (

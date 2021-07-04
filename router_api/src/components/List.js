@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Ul = styled.ul`
   margin-top: 2rem;
   height: 300px;
@@ -31,8 +32,8 @@ const Li = styled.li`
 `;
 
 // MEMO: 요청 상태 값에 따른 조건부 렌더링
-function List({ state }) {
-  const { loading, data, error } = state;
+function List() {
+  const { loading, data, error } = useSelector(state => state.symbols);
 
   if (!data) return null;
   if (loading) return <span>loading...</span>;
