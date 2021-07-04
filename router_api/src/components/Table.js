@@ -47,7 +47,7 @@ function Table({
 
   useEffect(() => {
     dispatch(getSheet(symbol, location.search));
-  }, []);
+  }, [location.search]);
 
   if (!data) return null;
   if (!data.balancesheet) return null;
