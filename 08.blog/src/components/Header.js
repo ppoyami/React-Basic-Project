@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import SearchBar from './SearchBar';
+
 const Layout = styled.header`
   position: fixed;
   top: 0;
@@ -37,6 +39,7 @@ export default function Header() {
         <SubTitle>IT Solution</SubTitle>
         <SubTitle>Consultancy Firm</SubTitle>
       </SubWrapper>
+      <SearchBar />
     </Layout>
   );
 }

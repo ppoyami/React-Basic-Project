@@ -4,7 +4,7 @@
 
 1. jsonplaceholder 비동기 요청 연습
 2. react-router hooks 사용해보기
-3. redux 연습하기
+3. redux 연습하기 (ducks / features(hooks))
 4. redux-thunk 사용하기
 5. node
 6. 배포
