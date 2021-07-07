@@ -6,6 +6,7 @@ import ThemeProvider from './context/ThemeProvider';
 
 import Home from './page/Home';
 import Detail from './page/Detail';
+import Profile from './page/Profile';
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/post/:postId">
+            <Route exact path="/posts/:postId">
               <Detail />
+            </Route>
+            <Route exact path="/users/:userId">
+              <Profile />
             </Route>
           </Switch>
         </AppLayout>

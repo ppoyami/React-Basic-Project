@@ -30,20 +30,20 @@ export const reducerUtils = (type, initialState) => {
     };
   }
 
-  function loading() {
+  function creatorLoading() {
     return {
       type: LOADING,
     };
   }
 
-  function success(payload) {
+  function creatorSuccess(payload) {
     return {
       type: SUCCESS,
       payload,
     };
   }
 
-  function error(error) {
+  function creatorError(error) {
     return {
       type: ERROR,
       error,
@@ -52,8 +52,8 @@ export const reducerUtils = (type, initialState) => {
 
   return {
     createReducer,
-    loading,
-    success,
-    error,
+    creatorLoading,
+    creatorSuccess,
+    creatorError,
   };
 };

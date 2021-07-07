@@ -1,28 +1,18 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import { getPosts } from '../api';
-import { loading, success, error } from '../modules/posts';
+import { creatorLoading, creatorSuccess, creatorError } from '../modules/posts';
+import useAsync from '../hooks/useAsync';
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const posts = useSelector(state => state.posts);
+  const { loading, error, payload } = useAsync(
+    getPosts,
+    creatorLoading,
+    creatorSuccess,
+    creatorError
+  );
 
-  const fetchPosts = async () => {
-    dispatch(loading());
-    try {
-      const payload = await getPosts();
-      dispatch(success(payload));
-    } catch (e) {
-      dispatch(error(e));
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  console.log(posts);
+  if (loading) return <span>loading...</span>;
+  if (error) return <span>{error}</span>;
+  if (!payload) return null;
 
   return <div>Home</div>;
 }
