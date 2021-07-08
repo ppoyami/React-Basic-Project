@@ -7,6 +7,7 @@ const Layout = styled.div`
   height: 100%;
   position: relative;
   margin-top: 7rem;
+  /* overflow: hidden; */
 `;
 
 export default function AppLayout({ children }) {
