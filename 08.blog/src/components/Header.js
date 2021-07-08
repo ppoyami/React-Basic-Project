@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import SearchBar from './SearchBar';
+import ToggleButton from './ToggleButton';
 
 const Layout = styled.header`
   position: fixed;
@@ -40,6 +41,7 @@ export default function Header() {
         <SubTitle>Consultancy Firm</SubTitle>
       </SubWrapper>
       <SearchBar />
+      <ToggleButton />
     </Layout>
   );
 }
