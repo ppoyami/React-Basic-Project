@@ -14,7 +14,7 @@ const Input = styled.input`
   padding: 1rem;
 `;
 
-// TODO: SearchBar에서 어떻게 상태를 변경할 수 있을까?
+// MEMO: SearchBar에서 어떻게 상태를 변경할 수 있을까? -> query 만 구성하여 위임한다.
 export default function SearchBar() {
   const [query, onChange] = useInput('');
 

@@ -7,9 +7,14 @@ const initialState = {
 };
 
 const TYPE = 'posts';
-const { createReducer, creatorLoading, creatorSuccess, creatorError } =
-  reducerUtils(TYPE, initialState);
+const {
+  createReducer,
+  creatorLoading,
+  creatorSuccess,
+  creatorError,
+  selector,
+} = reducerUtils(TYPE, initialState);
 
 const posts = createReducer();
 
-export { posts, creatorLoading, creatorSuccess, creatorError };
+export { posts, creatorLoading, creatorSuccess, creatorError, selector };

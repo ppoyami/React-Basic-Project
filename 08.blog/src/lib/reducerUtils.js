@@ -50,10 +50,15 @@ export const reducerUtils = (type, initialState) => {
     };
   }
 
+  function selector(state) {
+    return state[type];
+  }
+
   return {
     createReducer,
     creatorLoading,
     creatorSuccess,
     creatorError,
+    selector,
   };
 };

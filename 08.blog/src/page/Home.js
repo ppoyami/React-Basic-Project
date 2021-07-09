@@ -5,7 +5,12 @@ import styled from 'styled-components';
 
 import { getPosts } from '../api';
 import useAsync from '../hooks/useAsync';
-import { creatorLoading, creatorSuccess, creatorError } from '../modules/posts';
+import {
+  creatorLoading,
+  creatorSuccess,
+  creatorError,
+  selector,
+} from '../modules/posts';
 import filterDecorator from '../lib/filterDecorator';
 
 import Sidebar from '../components/Sidebar';
@@ -35,7 +40,8 @@ export default function Home() {
     filterGetPosts,
     creatorLoading,
     creatorSuccess,
-    creatorError
+    creatorError,
+    selector
   );
 
   console.log(payload);

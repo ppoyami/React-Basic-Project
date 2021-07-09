@@ -7,9 +7,14 @@ const initialState = {
 };
 
 const TYPE = 'user';
-const { createReducer, creatorLoading, creatorSuccess, creatorError } =
-  reducerUtils(TYPE, initialState);
+const {
+  createReducer,
+  creatorLoading,
+  creatorSuccess,
+  creatorError,
+  selector,
+} = reducerUtils(TYPE, initialState);
 
 const user = createReducer();
 
-export { user, creatorLoading, creatorSuccess, creatorError };
+export { user, creatorLoading, creatorSuccess, creatorError, selector };
