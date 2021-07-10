@@ -22,7 +22,7 @@ export default function SearchBar() {
 
   const onSubmit = e => {
     e.preventDefault();
-    history.push(`/?query=${query}`);
+    history.push(`/?search=${query}`);
   };
 
   return (

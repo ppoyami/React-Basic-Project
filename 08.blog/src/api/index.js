@@ -12,11 +12,11 @@ const getPosts = async () => {
   const data = await api.get('/posts');
   return data;
 };
-const getUser = async () => {
+const getUsers = async () => {
   const data = await api.get('/users');
   return data;
 };
-const getUsers = async id => {
+const getUser = async id => {
   const data = await api.get(`/users/${id}`);
   return data;
 };

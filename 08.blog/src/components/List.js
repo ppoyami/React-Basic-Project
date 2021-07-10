@@ -13,7 +13,13 @@ export default function List({ posts }) {
   return (
     <Layout>
       {posts.map(post => (
-        <Item key={post.id} id={post.id} title={post.title} desc={post.body} />
+        <Item
+          key={post.id}
+          id={post.id}
+          userId={post.userId}
+          title={post.title}
+          desc={post.body}
+        />
       ))}
     </Layout>
   );

@@ -33,10 +33,10 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-export default function Item({ id, title, desc }) {
+export default function Item({ id, userId, title, desc }) {
   return (
     <Layout>
-      <StyledLink to={`/posts/${id}`}>
+      <StyledLink to={`/posts/${id}/${userId}`}>
         <Title>{title.length > 40 ? title.slice(0, 40) + '...' : title}</Title>
         <Desc>{desc.slice(0, 200) + '...'}</Desc>
       </StyledLink>

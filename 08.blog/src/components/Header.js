@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
@@ -20,6 +21,7 @@ const Layout = styled.header`
 
 const Title = styled.h1`
   font-size: 2.5rem;
+  cursor: pointer;
 `;
 
 const SubWrapper = styled.div`
@@ -33,9 +35,10 @@ const SubTitle = styled.span`
 `;
 
 export default function Header() {
+  const history = useHistory();
   return (
     <Layout>
-      <Title>Studio.</Title>
+      <Title onClick={() => history.push('/')}>Studio.</Title>
       <SubWrapper>
         <SubTitle>IT Solution</SubTitle>
         <SubTitle>Consultancy Firm</SubTitle>
