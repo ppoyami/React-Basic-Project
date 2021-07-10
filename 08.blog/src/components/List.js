@@ -5,7 +5,7 @@ import Item from './Item';
 
 const Layout = styled.div`
   position: absolute;
-  right: 20%;
+  right: 10%;
   padding: 8rem;
 `;
 

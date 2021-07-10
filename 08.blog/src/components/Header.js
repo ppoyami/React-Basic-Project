@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
@@ -34,6 +34,23 @@ const SubTitle = styled.span`
   opacity: 0.7;
 `;
 
+const Menu = styled.div`
+  position: absolute;
+  right: 10%;
+  & > a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-right: 3rem;
+    padding-bottom: 0.5rem;
+  }
+
+  & > a:hover {
+    border-bottom: 3px solid dodgerblue;
+  }
+`;
+
 export default function Header() {
   const history = useHistory();
   return (
@@ -45,6 +62,10 @@ export default function Header() {
       </SubWrapper>
       <SearchBar />
       <ToggleButton />
+      <Menu>
+        <Link to="/login">login</Link>
+        <Link to="/sign-up">sign up</Link>
+      </Menu>
     </Layout>
   );
 }

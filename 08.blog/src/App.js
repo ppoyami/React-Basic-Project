@@ -7,6 +7,7 @@ import ThemeProvider from './context/ThemeProvider';
 import Home from './page/Home';
 import Detail from './page/Detail';
 import Profile from './page/Profile';
+import Login from './page/Login';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/login">
+              <Login />
             </Route>
             <Route exact path="/posts/:postId/:userId">
               <Detail />
