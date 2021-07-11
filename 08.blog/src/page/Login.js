@@ -3,36 +3,37 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
 import { FaKey } from 'react-icons/fa';
+
+import Input from '../components/common/Input';
+import Button from '../components/common/Button';
 import useInput from '../hooks/useInput';
 
 export default function Login() {
   const [email, onEmail] = useInput('');
   const [password, onPassword] = useInput('');
+
+  const onSubmit = e => {
+    e.preventDefault();
+  };
+
   return (
     <Layout>
-      <Form>
-        <InputWrapper>
-          <Input
-            type="email"
-            value={email}
-            placeholder="Email"
-            onChange={onEmail}
-          />
-          <Icon>
-            <FaUser />
-          </Icon>
-        </InputWrapper>
-        <InputWrapper>
-          <Input
-            type="password"
-            value={password}
-            placeholder="Password"
-            onChange={onPassword}
-          />
-          <Icon>
-            <FaKey />
-          </Icon>
-        </InputWrapper>
+      <Form onSubmit={onSubmit}>
+        <Input
+          icon={<FaUser />}
+          type="email"
+          value={email}
+          placeholder="Email"
+          onChange={onEmail}
+        />
+        <Input
+          icon={<FaKey />}
+          type="password"
+          value={password}
+          placeholder="Password"
+          onChange={onPassword}
+        />
+        <Button>Login</Button>
       </Form>
     </Layout>
   );
@@ -45,52 +46,9 @@ const Layout = styled.div`
   justify-content: center;
 `;
 const Form = styled.form`
-  width: 25%;
-`;
-const InputWrapper = styled.div`
-  position: relative;
-  margin-bottom: 4rem;
-`;
-
-const Input = styled.input`
-  padding: 0.5rem;
-  height: 5rem;
-  width: 100%;
-  outline: none;
-
-  padding-left: 6rem;
-  border-radius: 5px;
-  font-size: 2rem;
-
-  transition: 0.3s;
-
-  &:focus + i {
-    color: tomato;
-  }
-
-  &:focus {
-    border: 1px solid tomato;
-    box-shadow: 0 0 5px tomato;
-  }
-
-  &:focus::placeholder {
-    visibility: hidden;
-  }
-`;
-const Icon = styled.i`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 5rem;
-  height: 5rem;
-
-  text-align: center;
-  line-height: 5rem;
-
-  font-size: 2rem;
-
-  color: #444;
-  transition: 0.3s;
-
-  border-radius: 5px 0 0 5px;
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

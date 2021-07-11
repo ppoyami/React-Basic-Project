@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Layout = styled.div`
   margin-bottom: 5rem;
   padding-bottom: 5rem;
-  border-bottom: 1px solid #fff;
+  border-bottom: ${({ theme }) => theme.borderColor};
 
   &:hover {
     & h1,

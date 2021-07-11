@@ -4,10 +4,7 @@ import AppLayout from './components/AppLayout';
 import GlobalStyle from './global/GlobalStyle';
 import ThemeProvider from './context/ThemeProvider';
 
-import Home from './page/Home';
-import Detail from './page/Detail';
-import Profile from './page/Profile';
-import Login from './page/Login';
+import routes from './page';
 
 function App() {
   return (
@@ -16,18 +13,10 @@ function App() {
         <GlobalStyle />
         <AppLayout>
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/posts/:postId/:userId">
-              <Detail />
-            </Route>
-            <Route exact path="/users/:userId">
-              <Profile />
-            </Route>
+            {/* // MEMO: 라우터 깔끔하게 렌더링하기 */}
+            {routes.map(props => (
+              <Route {...props} />
+            ))}
           </Switch>
         </AppLayout>
       </ThemeProvider>
