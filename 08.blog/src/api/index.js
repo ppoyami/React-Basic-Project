@@ -25,9 +25,10 @@ const login = async (email, password) => {
   const defaultUser = {
     email: email,
     username: 'Lyan',
+    phone: '011-234-1257',
   };
   // Q: setTimeout은 id를 반환함.
-  // A: Promise로 1000ms 이후 로그인 유저 정보를 반환하는 로직을 수행
+  // A: await은 Promise를 받는다. 1000ms 이후 로그인 유저 정보를 resolve하는 Promise 생성
   const data = await new Promise((resolve, reject) => {
     setTimeout(() => resolve(defaultUser), 1000);
   });
