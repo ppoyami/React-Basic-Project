@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { FaUser, FaLock, FaMailBulk, FaUserLock } from 'react-icons/fa';
+import { FaUser, FaLock, FaEnvelope, FaUserLock } from 'react-icons/fa';
 
 import useInputs from '../hooks/useInputs';
 
@@ -30,7 +30,7 @@ export default function Sign() {
           onChange={onChange}
         />
         <Input
-          icon={<FaMailBulk />}
+          icon={<FaEnvelope />}
           type="email"
           placeholder="email"
           name="email"

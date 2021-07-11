@@ -45,6 +45,8 @@ export default function Home() {
     }
     if (prefix === 'userId') {
       return filterDecorator(getPosts, post => post.userId === Number(string));
+    } else {
+      return getPosts;
     }
   }, [string, prefix]);
 

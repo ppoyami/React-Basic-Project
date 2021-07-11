@@ -5,8 +5,8 @@ import Item from './Item';
 
 const Layout = styled.div`
   position: absolute;
-  right: 10%;
   padding: 8rem;
+  right: 20%;
 `;
 
 export default function List({ posts }) {

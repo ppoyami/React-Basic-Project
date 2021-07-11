@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 
+import { selector } from '../modules/loggedInUser';
+
 import SearchBar from './SearchBar';
 import ToggleButton from './ToggleButton';
+import { useSelector } from 'react-redux';
 
 const Layout = styled.header`
   position: fixed;
@@ -46,6 +49,11 @@ const Menu = styled.div`
     padding-bottom: 0.5rem;
   }
 
+  & > span {
+    font-size: 2rem;
+    margin-right: 3rem;
+  }
+
   & > a:hover {
     border-bottom: 3px solid dodgerblue;
   }
@@ -53,6 +61,8 @@ const Menu = styled.div`
 
 export default function Header() {
   const history = useHistory();
+  const { payload: user } = useSelector(selector);
+  console.log(user);
   return (
     <Layout>
       <Title onClick={() => history.push('/')}>Studio.</Title>
@@ -63,8 +73,19 @@ export default function Header() {
       <SearchBar />
       <ToggleButton />
       <Menu>
-        <Link to="/login">login</Link>
-        <Link to="/sign-up">sign up</Link>
+        {user ? (
+          <>
+            <Link to="/profile">Profile</Link>
+            <span style={{ color: 'dodgerblue', fontWeight: 800 }}>
+              {user.username}
+            </span>
+          </>
+        ) : (
+          <>
+            <Link to="/login">login</Link>
+            <Link to="/sign-up">sign up</Link>
+          </>
+        )}
       </Menu>
     </Layout>
   );

@@ -5,6 +5,7 @@ import GlobalStyle from './global/GlobalStyle';
 import ThemeProvider from './context/ThemeProvider';
 
 import routes from './page';
+import ProtecedRoute from './components/common/ProtecedRoute';
 
 function App() {
   return (
@@ -13,10 +14,14 @@ function App() {
         <GlobalStyle />
         <AppLayout>
           <Switch>
-            {/* // MEMO: 라우터 깔끔하게 렌더링하기 */}
-            {routes.map(props => (
-              <Route {...props} />
-            ))}
+            {/* // MEMO: 조건부 라우팅 깔끔하게 렌더링하기 */}
+            {routes.map(({ loginRequired, ...props }) => {
+              return loginRequired ? (
+                <ProtecedRoute {...props} />
+              ) : (
+                <Route {...props} />
+              );
+            })}
           </Switch>
         </AppLayout>
       </ThemeProvider>
