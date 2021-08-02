@@ -13,18 +13,3 @@
 1. 컬렉션 마다 할 일을 추가 할 수 있습니다.
 
 ---
-
-## code snippets
-
-1. collections={collections} 보다 간략하게 속성 추가하기
-
-```jsx
-const props = {
-  collections,
-  goHome,
-  onCreateCollection,
-  getCount,
-};
-
-return <DashBoard {...props} />;
-```

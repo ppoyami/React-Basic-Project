@@ -25,18 +25,3 @@
 5. 홈 링크(history.push('/'))
 
 ---
-
-## code snippets
-
-1. Switch 컴포넌트 이용하여 PageNotFound 렌더링하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638740-d65d3480-d130-11eb-8576-8e949c77b502.png)
-2. axios instance 와 요청 함수로 api.js 구성하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638767-fe4c9800-d130-11eb-901e-9ee5861b12f3.png)
-3. useAsync custom hook 작성하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638785-1d4b2a00-d131-11eb-92d6-514013d0d72e.png)
-4. useAsync() 사용하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638840-73b86880-d131-11eb-95e0-d09cd3d9a745.png)
-5. url params, url query 사용하기 (qs 라이브러리)
-  ![image](https://user-images.githubusercontent.com/50171003/122638853-92b6fa80-d131-11eb-9ed0-740581924c9b.png)
-6. sub routing으로 탭 메뉴 구현하기, 홈 링크
-  ![image](https://user-images.githubusercontent.com/50171003/122638883-bc702180-d131-11eb-8ee4-0e9225ceddfe.png)

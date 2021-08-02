@@ -15,12 +15,3 @@
 3. 기다리면, progress bar가 진행되며 자동으로 사라진다.
 
 ---
-
-## code snippets
-
-1. styled-components 로 애니메이션 정의하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638569-c002a900-d12f-11eb-8492-1f96907e9089.png)
-2. 속성에 따라 조건부 css(애니메이션) 적용하기
-  ![image](https://user-images.githubusercontent.com/50171003/122638584-e1639500-d12f-11eb-98ca-38d1b88cefa4.png)
-3. 컴포넌트 내부 상태 값으로 언마운트를 지연시키기
-  ![image](https://user-images.githubusercontent.com/50171003/122638617-166fe780-d130-11eb-8f28-464ce559b2ea.png)

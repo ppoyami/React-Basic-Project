@@ -10,6 +10,7 @@ import Button from '../components/common/Button';
 
 export default function Profile() {
   const { payload: user } = useSelector(selector);
+
   const [value, onChange] = useInputs({
     username: user.username,
     email: user.email,
